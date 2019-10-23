@@ -1,6 +1,1 @@
-TS React starter
-
-TODO:
-
-- initialising via blob generators;
-- make generator templates;
+Fantastic Card Form | TS | React
