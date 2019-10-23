@@ -1,11 +1,7 @@
 {
-  "name": "react-ts-starter",
+  "name": "card-form",
   "version": "1.0.0",
-  "description": "TS React starter",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/rjohnep/react-starter.git"
-  },
+  "description": "Credit card form | React",
   "engines": {
     "npm": ">=5",
     "node": ">=8.15.1"
