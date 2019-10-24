@@ -1,3 +1,4 @@
+/* eslint-disable*/
 /**
  * DEVELOPMENT WEBPACK CONFIGURATION
  */
@@ -52,7 +53,7 @@ module.exports = require('./webpack.base')({
   devServer: {
     contentBase: path.join(__dirname, 'build'),
     compress: true,
-    port: 9000,
+    port: 9001,
     hot: true,
     historyApiFallback: true
   }

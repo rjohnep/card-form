@@ -1,3 +1,4 @@
+/* eslint-disable*/
 // Important modules this config uses
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -11,7 +12,7 @@ module.exports = require('./webpack.base')({
   // In production, we skip all hot-reloading stuff
   entry: [
     require.resolve('react-app-polyfill/ie11'),
-    path.join(process.cwd(), 'app/app.tsx')
+    join(process.cwd(), 'app/app.tsx')
   ],
 
   // Utilize long-term caching by adding content hashes (not compilation hashes) to compiled assets

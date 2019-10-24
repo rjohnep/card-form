@@ -1,7 +1,4 @@
-/**
- * COMMON WEBPACK CONFIGURATION
- */
-
+/* eslint-disable*/
 const path = require('path');
 const webpack = require('webpack');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
@@ -21,7 +18,8 @@ module.exports = (options) => ({
         test: /\.tsx?$/,
         exclude: /node_modules/,
         use: {
-          loader: 'ts-loader'
+          loader: 'babel-loader',
+          options: options.babelQuery
         }
       },
       {
