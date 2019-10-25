@@ -1,10 +1,21 @@
-import baseStyled, { ThemedStyledInterface } from 'styled-components';
+import baseStyled, {
+  ThemedStyledInterface,
+  createGlobalStyle
+} from 'styled-components';
+
+export const GlobalStyle = createGlobalStyle`
+  body {
+    font-family: 'Roboto';
+  }
+`;
 
 export const theme = {
   colors: {
     main: '',
     secondary: '',
-    bg: '#fff'
+    bg: '#fff',
+    white: '#fff',
+    black: '#000'
   }
 };
 

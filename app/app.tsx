@@ -1,17 +1,20 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import { ThemeProvider } from 'styled-components';
 import 'sanitize.css/sanitize.css';
 
 import { CardForm } from './containers/CardForm';
-import { theme } from './theme';
+import { theme, GlobalStyle } from './theme';
 
 const MOUNT_NODE = document.getElementById('app');
 
 const render = () => {
   ReactDOM.render(
     <ThemeProvider theme={theme}>
-      <CardForm />
+      <Fragment>
+        <GlobalStyle />
+        <CardForm />
+      </Fragment>
     </ThemeProvider>,
     MOUNT_NODE
   );
