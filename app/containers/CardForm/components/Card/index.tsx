@@ -7,7 +7,8 @@ import {
   Expires,
   Logo,
   FrontSide,
-  BackSide
+  BackSide,
+  CVV
 } from './styled';
 import { CardPropsT } from './types';
 
@@ -33,7 +34,7 @@ export const Card: FC<CardPropsT> = (props: CardPropsT) => {
       <BackSide isFront={isFront}>
         <Logo back />
         <div className="black-line"></div>
-        <label htmlFor="cardCvv">{props.cvv}</label>
+        <CVV htmlFor="cardCvv">{props.cvv}</CVV>
       </BackSide>
     </Wrapper>
   );

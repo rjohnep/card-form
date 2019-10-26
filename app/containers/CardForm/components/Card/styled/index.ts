@@ -19,7 +19,7 @@ const CommomCardStyle = css`
   backface-visibility: hidden;
 `;
 
-export const Logo = styled.div`
+export const Logo = styled.div<{ back?: boolean }>`
   position: absolute;
   top: 25px;
   right: 25px;
@@ -30,9 +30,17 @@ export const Logo = styled.div`
   width: 100%; // TODO: remove temp
   background: #fff; // TODO: remove temp
   opacity: 0.5; // TODO: remove temp
+
+  ${({ back }): undefined | false | string =>
+    back &&
+    `
+    bottom: 25px;
+    top: auto;
+    background: #000;
+  `}
 `;
 
-export const FrontSide = styled.div`
+export const FrontSide = styled.div<{ isFront: boolean }>`
   ${CommomCardStyle};
 
   color: ${(props): string => props.theme.colors.white};
@@ -40,11 +48,11 @@ export const FrontSide = styled.div`
 
   transform: perspective(2000px) rotateY(0deg) rotateX(0deg) rotate(0deg);
 
-  ${({ isFront }) =>
+  ${({ isFront }): false | string =>
     !isFront && `transform: perspective(1000px) rotateY(180deg) rotateX(0deg);`}
 `;
 
-export const BackSide = styled.div`
+export const BackSide = styled.div<{ isFront: boolean }>`
   ${CommomCardStyle};
 
   position: absolute;
@@ -57,13 +65,13 @@ export const BackSide = styled.div`
 
   transform: perspective(2000px) rotateY(-180deg) rotateX(0deg) rotate(0deg);
 
-  ${({ isFront }) =>
+  ${({ isFront }): false | string =>
     !isFront &&
     ` transform: perspective(1000px) rotateY(0) rotateX(0deg) rotateZ(0deg);`}
 
   .black-line {
     position: absolute;
-    top: 80px;
+    top: 40px;
     width: 100%;
     height: 45px;
 
@@ -115,4 +123,26 @@ export const Expires = styled.div`
 
   display: flex;
   flex-direction: column;
+`;
+
+export const CVV = styled.label`
+  position: absolute;
+  bottom: 100px;
+  left: 50%;
+
+  width: 90%;
+  height: 40px;
+  background: #ccc;
+  border-radius: 5px;
+
+  transform: translate(-50%, 0);
+
+  :after {
+    content: 'CVV';
+    position: absolute;
+    top: -20px;
+    width: 100%;
+    padding-right: 10px;
+    text-align: right;
+  }
 `;
