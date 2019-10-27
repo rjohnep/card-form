@@ -1,5 +1,7 @@
 import React, { FC, useState } from 'react';
 
+import { useCardFormContext } from '@app/containers/CardForm';
+
 import {
   Wrapper,
   Number,
@@ -14,10 +16,14 @@ import { CardPropsT } from './types';
 
 export const Card: FC<CardPropsT> = (props: CardPropsT) => {
   const [isFront, toggleSide] = useState(true);
+  const { state: cardFormState } = useCardFormContext();
 
   return (
     <Wrapper>
       <FrontSide isFront={isFront}>
+        {cardFormState &&
+          cardFormState.currentFocus &&
+          cardFormState.currentFocus.width}
         <Logo />
         <Number htmlFor="cardNumber">{props.number}</Number>
         <Holder>

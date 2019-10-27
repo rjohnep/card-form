@@ -1,28 +1,23 @@
-import React, { FC, useState, useEffect, FocusEvent } from 'react';
-import PropTypes from 'prop-types';
+import React, { FC, FocusEvent } from 'react';
 
 import { Wrapper, Field, Row } from './styled';
-import { FormPropsT, FormFocusStateT } from './types';
+import { useCardFormContext } from '../..';
 
-export const Form: FC<FormPropsT> = (props) => {
-  const [focusState, updateFocusState] = useState<FormFocusStateT | undefined>(
-    undefined
-  );
-
-  useEffect(() => {
-    if (focusState) {
-      props.onFocus(focusState);
-    }
-  });
+export const Form: FC = () => {
+  const { dispatch } = useCardFormContext();
 
   const onFormInputFocus = (e: FocusEvent<HTMLInputElement>): void => {
     if (e.target) {
-      updateFocusState({
-        width: `${e.target.offsetWidth}px`,
-        height: `${e.target.offsetHeight}px`,
-        top: `${e.target.offsetTop}px`,
-        left: `${e.target.offsetLeft}px`
-      });
+      dispatch &&
+        dispatch({
+          type: 'update_current_focus',
+          payload: {
+            width: `${e.target.offsetWidth}px`,
+            height: `${e.target.offsetHeight}px`,
+            top: `${e.target.offsetTop}px`,
+            left: `${e.target.offsetLeft}px`
+          }
+        });
     }
   };
 
@@ -46,6 +41,7 @@ export const Form: FC<FormPropsT> = (props) => {
           id="cardHolder"
           data-ref="cardName"
           autoComplete="off"
+          onFocus={(e): void => onFormInputFocus(e)}
         />
       </Field>
 
@@ -67,13 +63,15 @@ export const Form: FC<FormPropsT> = (props) => {
 
         <Field short>
           <label htmlFor="cardCvv">CVV</label>
-          <input type="text" id="cardCvv" maxLength={4} autoComplete="off" />
+          <input
+            type="text"
+            id="cardCvv"
+            maxLength={4}
+            autoComplete="off"
+            onFocus={(e): void => onFormInputFocus(e)}
+          />
         </Field>
       </Row>
     </Wrapper>
   );
-};
-
-Form.propTypes = {
-  onFocus: PropTypes.func.isRequired
 };

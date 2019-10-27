@@ -1,22 +1,49 @@
-import React, { ReactElement, useState } from 'react';
+import React, {
+  ReactElement,
+  Reducer,
+  useReducer,
+  createContext,
+  useContext
+} from 'react';
 
 import { Card } from './components/Card';
 import { Form } from './components/Form';
 
 import Wrapper from './styled/Wrapper';
-import { FormFocusStateT } from './components/Form/types';
+import { CardFormStateT, CardFormActionT, CardFormContextT } from './types';
+
+const initialState: CardFormStateT = { currentFocus: undefined };
+
+const cardFormReducer: Reducer<CardFormStateT, CardFormActionT> = (
+  state,
+  action
+) => {
+  switch (action.type) {
+    case 'update_current_focus':
+      return {
+        ...state,
+        currentFocus: action.payload
+      };
+  }
+};
+
+const CardFormContext = createContext<CardFormContextT>({
+  state: undefined,
+  dispatch: undefined
+});
+
+export const useCardFormContext = (): CardFormContextT =>
+  useContext(CardFormContext);
 
 export const CardForm = (): ReactElement => {
-  const [focusState, updateFocusState] = useState(undefined);
-
-  const onFocus = (focusState: FormFocusStateT) => {
-    debugger;
-  };
+  const [state, dispatch] = useReducer(cardFormReducer, initialState);
 
   return (
-    <Wrapper>
-      <Card />
-      <Form onFocus={onFocus} />
-    </Wrapper>
+    <CardFormContext.Provider value={{ state, dispatch }}>
+      <Wrapper>
+        <Card />
+        <Form />
+      </Wrapper>
+    </CardFormContext.Provider>
   );
 };
