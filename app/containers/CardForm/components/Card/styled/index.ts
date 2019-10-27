@@ -123,6 +123,10 @@ export const Expires = styled.div`
 
   display: flex;
   flex-direction: column;
+
+  span {
+    font-size: 12px;
+  }
 `;
 
 export const CVV = styled.label`

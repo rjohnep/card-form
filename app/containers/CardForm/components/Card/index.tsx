@@ -16,7 +16,7 @@ export const Card: FC<CardPropsT> = (props: CardPropsT) => {
   const [isFront, toggleSide] = useState(true);
 
   return (
-    <Wrapper onClick={(): void => toggleSide(!isFront)}>
+    <Wrapper>
       <FrontSide isFront={isFront}>
         <Logo />
         <Number htmlFor="cardNumber">{props.number}</Number>
