@@ -24,6 +24,13 @@ const cardFormReducer: Reducer<CardFormStateT, CardFormActionT> = (
         ...state,
         currentFocus: action.payload
       };
+    case 'reset_current_focus':
+      return {
+        ...state,
+        currentFocus: undefined
+      };
+    default:
+      return state;
   }
 };
 

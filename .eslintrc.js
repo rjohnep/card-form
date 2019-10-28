@@ -8,10 +8,15 @@ const prettierOptions = JSON.parse(
 module.exports = {
   parser: '@typescript-eslint/parser',
   extends: [
+    'airbnb-typescript',
     'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended',
     'prettier/@typescript-eslint',
-    'plugin:prettier/recommended'
+    'plugin:prettier/recommended',
+    'plugin:import/typescript',
+    'plugin:import/errors',
+    'plugin:import/warnings',
+    'plugin:import/typescript'
   ],
   plugins: ['prettier', '@typescript-eslint', 'react', 'react-hooks'],
   env: {
@@ -33,12 +38,10 @@ module.exports = {
     },
     'import/parsers': {
       '@typescript-eslint/parser': ['.ts', '.tsx']
-    },
-    'import/resolver': {
-      typescript: {}
     }
   },
   rules: {
+    'import/no-unresolved': 0,
     'prettier/prettier': ['error', prettierOptions],
     'arrow-body-style': [2, 'as-needed'],
     'class-methods-use-this': 0,

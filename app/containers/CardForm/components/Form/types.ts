@@ -1,6 +1,7 @@
-export type FormFocusStateT = {
-  width: string;
-  height: string;
-  top: string;
-  left: string;
-};
+export enum FormFieldIds {
+  cardNumber = 'cardNumber',
+  cardHolder = 'cardHolder',
+  cardExpirationM = 'cardExpirationM',
+  cardExpirationY = 'cardExpirationY',
+  cardCvv = 'cardCvv'
+}

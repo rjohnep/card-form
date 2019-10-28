@@ -80,6 +80,7 @@ export const BackSide = styled.div<{ isFront: boolean }>`
 `;
 
 export const Number = styled.label`
+  cursor: pointer;
   position: absolute;
   top: 50%;
   left: 25px;
@@ -100,11 +101,13 @@ export const Holder = styled.div`
   display: flex;
   flex-direction: column;
 
-  span {
+  label:first-child {
+    cursor: pointer;
     font-size: 12px;
   }
 
   label {
+    cursor: pointer;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -124,7 +127,8 @@ export const Expires = styled.div`
   display: flex;
   flex-direction: column;
 
-  span {
+  label:first-child {
+    cursor: pointer;
     font-size: 12px;
   }
 `;

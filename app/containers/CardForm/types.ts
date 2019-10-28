@@ -1,16 +1,22 @@
-import { FormFocusStateT } from './components/Form/types';
 import { Dispatch } from 'react';
 
 export type CardFormStateT = {
-  currentFocus: undefined | FormFocusStateT;
+  currentFocus: string | undefined;
 };
 
 export type CardFormActionT = {
-  type: 'update_current_focus';
-  payload?: FormFocusStateT;
+  type: 'update_current_focus' | 'reset_current_focus';
+  payload?: string;
 };
 
 export type CardFormContextT = {
   state: CardFormStateT | undefined;
   dispatch: Dispatch<CardFormActionT> | undefined;
+};
+
+export type CardFocusDataT = {
+  width: string;
+  height: string;
+  top: string;
+  left: string;
 };

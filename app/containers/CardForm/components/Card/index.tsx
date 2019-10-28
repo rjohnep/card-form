@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useRef, useEffect } from 'react';
 
 import { useCardFormContext } from '@app/containers/CardForm';
 
@@ -13,25 +13,39 @@ import {
   CVV
 } from './styled';
 import { CardPropsT } from './types';
+import { FormFieldIds } from '../Form/types';
 
 export const Card: FC<CardPropsT> = (props: CardPropsT) => {
   const [isFront, toggleSide] = useState(true);
   const { state: cardFormState } = useCardFormContext();
 
+  // useEffect(() => {
+  //   return () => {
+  //     cleanup;
+  //   };
+  // }, [state]);
+
+  const refNumber = useRef(null);
+  const refHolder = useRef(null);
+  const refExpiration = useRef(null);
+
   return (
     <Wrapper>
+      {/* eslint jsx-a11y/label-has-associated-control: ["error", { assert: "either" } ] */}
       <FrontSide isFront={isFront}>
         {cardFormState &&
           cardFormState.currentFocus &&
           cardFormState.currentFocus.width}
         <Logo />
-        <Number htmlFor="cardNumber">{props.number}</Number>
-        <Holder>
-          <span>Card Holder</span>
-          <label htmlFor="cardHolder">{props.holder}</label>
+        <Number ref={refNumber} htmlFor="cardNumber">
+          {props.number}
+        </Number>
+        <Holder ref={refHolder}>
+          <label htmlFor={FormFieldIds.cardHolder}>Card Holder</label>
+          <label htmlFor={FormFieldIds.cardHolder}>{props.holder}</label>
         </Holder>
-        <Expires>
-          <span>Expires</span>
+        <Expires ref={refExpiration}>
+          <label htmlFor="cardExpirationM">Expires</label>
           <label htmlFor="cardExpirationM">
             {props.dateM || 'MM'}/{props.dateY || 'YY'}
           </label>
