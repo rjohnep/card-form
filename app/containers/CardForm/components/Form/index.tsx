@@ -19,6 +19,12 @@ export const Form: FC = () => {
     }
   };
 
+  const onFormInputBlur = (): void => {
+    if (dispatch) {
+      dispatch({ type: 'reset_current_focus' });
+    }
+  };
+
   return (
     <Wrapper>
       <Field>
@@ -29,6 +35,7 @@ export const Form: FC = () => {
           data-ref={FormFieldIds.cardNumber}
           autoComplete="off"
           onFocus={(e): void => onFormInputFocus(e)}
+          onBlur={onFormInputBlur}
         />
       </Field>
 
@@ -40,6 +47,7 @@ export const Form: FC = () => {
           data-ref={FormFieldIds.cardHolder}
           autoComplete="off"
           onFocus={(e): void => onFormInputFocus(e)}
+          onBlur={onFormInputBlur}
         />
       </Field>
 
@@ -51,6 +59,7 @@ export const Form: FC = () => {
             data-ref={FormFieldIds.cardExpiration}
             defaultValue="Month"
             onFocus={(e): void => onFormInputFocus(e)}
+            onBlur={onFormInputBlur}
           >
             <option disabled>Month</option>
             <option>1</option>
@@ -61,6 +70,7 @@ export const Form: FC = () => {
             data-ref={FormFieldIds.cardExpiration}
             defaultValue="Year"
             onFocus={(e): void => onFormInputFocus(e)}
+            onBlur={onFormInputBlur}
           >
             <option disabled>Year</option>
             <option>2019</option>
@@ -77,6 +87,7 @@ export const Form: FC = () => {
             maxLength={4}
             autoComplete="off"
             onFocus={(e): void => onFormInputFocus(e)}
+            onBlur={onFormInputBlur}
           />
         </Field>
       </Row>

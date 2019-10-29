@@ -41,6 +41,9 @@ export const Card: FC<CardPropsT> = (props: CardPropsT) => {
           left: `${targetRef.current.offsetLeft}px`
         });
       }
+    } else {
+      console.log('reset focus');
+      updateFocusMeta(undefined);
     }
   }, [cardFormState]);
 
