@@ -42,7 +42,7 @@ export const Card: FC<CardPropsT> = (props: CardPropsT) => {
         });
       }
     } else {
-      console.log('reset focus');
+      // TODO: debounce focus reseting
       updateFocusMeta(undefined);
     }
   }, [cardFormState]);
