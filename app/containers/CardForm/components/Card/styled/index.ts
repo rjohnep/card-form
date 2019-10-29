@@ -1,8 +1,11 @@
-import { css } from 'styled-components';
+import { css, FlattenSimpleInterpolation } from 'styled-components';
 
 import { styled } from '@app/theme';
 
+import { Icon } from '@app/components/Icon';
+
 import Wrapper from './Wrapper';
+import { CardFocusMetaT } from '../types';
 
 export { Wrapper };
 
@@ -19,17 +22,15 @@ const CommomCardStyle = css`
   backface-visibility: hidden;
 `;
 
-export const Logo = styled.div<{ back?: boolean }>`
+export const Logo = styled(Icon)<{ back?: boolean }>`
+  z-index: 10;
+
   position: absolute;
-  top: 25px;
+  top: 15px;
   right: 25px;
 
   max-width: 100px;
-  height: 45px;
-
-  width: 100%; // TODO: remove temp
-  background: #fff; // TODO: remove temp
-  opacity: 0.5; // TODO: remove temp
+  height: 70px;
 
   ${({ back }): undefined | false | string =>
     back &&
@@ -80,19 +81,23 @@ export const BackSide = styled.div<{ isFront: boolean }>`
 `;
 
 export const Number = styled.label`
+  z-index: 10;
+
   cursor: pointer;
   position: absolute;
-  top: 50%;
+  top: calc(50% - 21px);
   left: 25px;
 
   font-size: 28px;
+  line-height: 28px;
   font-weight: bold;
   letter-spacing: 5px;
-
-  transform: translate(0, -50%);
+  text-shadow: 0 8px 30px #fff;
 `;
 
 export const Holder = styled.div`
+  z-index: 10;
+
   position: absolute;
   left: 25px;
   bottom: 25px;
@@ -118,6 +123,8 @@ export const Holder = styled.div`
 `;
 
 export const Expires = styled.div`
+  z-index: 10;
+
   position: absolute;
   right: 25px;
   bottom: 25px;
@@ -134,6 +141,8 @@ export const Expires = styled.div`
 `;
 
 export const CVV = styled.label`
+  z-index: 10;
+
   position: absolute;
   bottom: 100px;
   left: 50%;
@@ -153,4 +162,36 @@ export const CVV = styled.label`
     padding-right: 10px;
     text-align: right;
   }
+`;
+
+const focusMetaStyle = (
+  meta: CardFocusMetaT
+): FlattenSimpleInterpolation => css`
+  visibility: visible;
+
+  width: ${meta.width};
+  height: ${meta.height};
+  top: ${meta.top};
+  left: ${meta.left};
+`;
+export const Hightlighter = styled.div<{ meta: CardFocusMetaT | undefined }>`
+  z-index: 1;
+
+  visibility: hidden;
+  position: absolute;
+  padding: 5px 10px;
+
+  box-sizing: content-box;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-radius: 5px;
+
+  background: rgba(255, 255, 255, 0.2);
+  z-index: 1;
+
+  transform: translate(-12px, -8px);
+
+  ${({ meta }): FlattenSimpleInterpolation | undefined =>
+    meta && focusMetaStyle(meta)};
+
+  transition: all 0.45s;
 `;

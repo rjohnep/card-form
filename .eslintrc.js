@@ -41,6 +41,7 @@ module.exports = {
     }
   },
   rules: {
+    'jsx-a11y/label-has-associated-control': 0,
     'import/no-unresolved': 0,
     'prettier/prettier': ['error', prettierOptions],
     'arrow-body-style': [2, 'as-needed'],

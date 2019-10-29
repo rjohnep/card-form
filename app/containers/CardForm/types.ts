@@ -13,10 +13,3 @@ export type CardFormContextT = {
   state: CardFormStateT | undefined;
   dispatch: Dispatch<CardFormActionT> | undefined;
 };
-
-export type CardFocusDataT = {
-  width: string;
-  height: string;
-  top: string;
-  left: string;
-};

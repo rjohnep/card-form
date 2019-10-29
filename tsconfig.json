@@ -24,7 +24,8 @@
     "strictPropertyInitialization": true,
     "paths": {
       "*": ["node_modules/*"],
-      "@app/*": ["app/*"]
+      "@app/*": ["app/*"],
+      "@assets/*": ["assets/*"]
     }
   },
   "exclude": ["node_modules", "internals"],

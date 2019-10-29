@@ -8,7 +8,9 @@ import { FormFieldIds } from './types';
 export const Form: FC = () => {
   const { dispatch } = useCardFormContext();
 
-  const onFormInputFocus = (e: FocusEvent<HTMLInputElement>): void => {
+  const onFormInputFocus = (
+    e: FocusEvent<HTMLInputElement | HTMLSelectElement>
+  ): void => {
     if (e.target && dispatch) {
       dispatch({
         type: 'update_current_focus',
@@ -17,72 +19,65 @@ export const Form: FC = () => {
     }
   };
 
-  const a = 'asd';
-
   return (
     <Wrapper>
       <Field>
-        <label htmlFor="cardNumber">
-          Card Number
-          <input
-            type="number"
-            id="cardNumber"
-            data-ref="cardNumber"
-            autoComplete="off"
-            onFocus={(e): void => onFormInputFocus(e)}
-          />
-        </label>
+        <label htmlFor={FormFieldIds.cardNumber}>Card Number</label>
+        <input
+          type="number"
+          id={FormFieldIds.cardNumber}
+          data-ref={FormFieldIds.cardNumber}
+          autoComplete="off"
+          onFocus={(e): void => onFormInputFocus(e)}
+        />
       </Field>
 
       <Field>
-        <label htmlFor={FormFieldIds.cardHolder}>
-          Card Holder
-          <input
-            type="text"
-            id={FormFieldIds.cardHolder}
-            data-ref={FormFieldIds.cardHolder}
-            autoComplete="off"
-            onFocus={(e): void => onFormInputFocus(e)}
-          />
-        </label>
+        <label htmlFor={FormFieldIds.cardHolder}>Card Holder</label>
+        <input
+          type="text"
+          id={FormFieldIds.cardHolder}
+          data-ref={FormFieldIds.cardHolder}
+          autoComplete="off"
+          onFocus={(e): void => onFormInputFocus(e)}
+        />
       </Field>
 
       <Row>
         <Field group>
-          <label htmlFor="cardExpirationM">
-            Expiration Date
-            <select
-              id="cardExpirationM"
-              data-ref="cardDate"
-              defaultValue="Month"
-            >
-              <option disabled>Month</option>
-              <option>1</option>
-              <option>2</option>
-            </select>
-            <select
-              id="cardExpirationY"
-              data-ref="cardDate"
-              defaultValue="Year"
-            >
-              <option disabled>Year</option>
-              <option>2019</option>
-              <option>2020</option>
-            </select>
-          </label>
+          <label htmlFor={FormFieldIds.cardExpirationM}>Expiration Date</label>
+          <select
+            id={FormFieldIds.cardExpirationM}
+            data-ref={FormFieldIds.cardExpiration}
+            defaultValue="Month"
+            onFocus={(e): void => onFormInputFocus(e)}
+          >
+            <option disabled>Month</option>
+            <option>1</option>
+            <option>2</option>
+          </select>
+          <select
+            id={FormFieldIds.cardExpirationY}
+            data-ref={FormFieldIds.cardExpiration}
+            defaultValue="Year"
+            onFocus={(e): void => onFormInputFocus(e)}
+          >
+            <option disabled>Year</option>
+            <option>2019</option>
+            <option>2020</option>
+          </select>
         </Field>
 
         <Field short>
-          <label htmlFor="cardCvv">
-            CVV
-            <input
-              type="text"
-              id="cardCvv"
-              maxLength={4}
-              autoComplete="off"
-              onFocus={(e): void => onFormInputFocus(e)}
-            />
-          </label>
+          <label htmlFor={FormFieldIds.cardCvv}>CVV</label>
+          <input
+            type="text"
+            id={FormFieldIds.cardCvv}
+            data-ref={FormFieldIds.cardCvv}
+            maxLength={4}
+            autoComplete="off"
+            onFocus={(e): void => onFormInputFocus(e)}
+          />
         </Field>
       </Row>
     </Wrapper>

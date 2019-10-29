@@ -39,6 +39,20 @@ module.exports = (options) => ({
       {
         test: /\.(eot|otf|ttf|woff|woff2)$/,
         use: 'file-loader'
+      },
+      {
+        test: /\.svg$/,
+        use: [
+          'svg-sprite-loader',
+          {
+            loader: 'svgo-loader',
+            options: {
+              removeAttrs: {
+                attrs: '*:(stroke|fill):((?!^none$).)*'
+              }
+            }
+          }
+        ]
       }
     ]
   },

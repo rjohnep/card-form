@@ -1,67 +1,83 @@
 import React, { FC, useState, useRef, useEffect } from 'react';
 
-import { useCardFormContext } from '@app/containers/CardForm';
+import VisaIcon from '@assets/icons/visa-pay-logo.svg';
+// import VisaIcon from '@assets/icons/master-card-logo.svg';
 
-import {
-  Wrapper,
-  Number,
-  Holder,
-  Expires,
-  Logo,
-  FrontSide,
-  BackSide,
-  CVV
-} from './styled';
-import { CardPropsT } from './types';
+import { useCardFormContext } from '@app/containers/CardForm';
 import { FormFieldIds } from '../Form/types';
+
+import * as SC from './styled';
+import { CardPropsT, CardFocusMetaT } from './types';
 
 export const Card: FC<CardPropsT> = (props: CardPropsT) => {
   const [isFront, toggleSide] = useState(true);
+  const [focusMeta, updateFocusMeta] = useState<CardFocusMetaT | undefined>(
+    undefined
+  );
   const { state: cardFormState } = useCardFormContext();
 
-  // useEffect(() => {
-  //   return () => {
-  //     cleanup;
-  //   };
-  // }, [state]);
+  const refs = {
+    [FormFieldIds.cardNumber]: useRef(null),
+    [FormFieldIds.cardHolder]: useRef(null),
+    [FormFieldIds.cardExpiration]: useRef(null)
+  };
 
-  const refNumber = useRef(null);
-  const refHolder = useRef(null);
-  const refExpiration = useRef(null);
+  useEffect(() => {
+    if (cardFormState && cardFormState.currentFocus) {
+      if (
+        (cardFormState.currentFocus === FormFieldIds.cardCvv && isFront) ||
+        (cardFormState.currentFocus !== FormFieldIds.cardCvv && !isFront)
+      ) {
+        toggleSide(!isFront);
+      }
+
+      const targetRef = refs[cardFormState.currentFocus];
+
+      if (targetRef) {
+        updateFocusMeta({
+          width: `${targetRef.current.offsetWidth}px`,
+          height: `${targetRef.current.offsetHeight}px`,
+          top: `${targetRef.current.offsetTop}px`,
+          left: `${targetRef.current.offsetLeft}px`
+        });
+      }
+    }
+  }, [cardFormState]);
 
   return (
-    <Wrapper>
-      {/* eslint jsx-a11y/label-has-associated-control: ["error", { assert: "either" } ] */}
-      <FrontSide isFront={isFront}>
-        {cardFormState &&
-          cardFormState.currentFocus &&
-          cardFormState.currentFocus.width}
-        <Logo />
-        <Number ref={refNumber} htmlFor="cardNumber">
+    <SC.Wrapper>
+      <SC.FrontSide isFront={isFront}>
+        <SC.Hightlighter meta={focusMeta} />
+
+        <SC.Logo icon={VisaIcon} />
+        <SC.Number
+          ref={refs[FormFieldIds.cardNumber]}
+          htmlFor={FormFieldIds.cardNumber}
+        >
           {props.number}
-        </Number>
-        <Holder ref={refHolder}>
+        </SC.Number>
+        <SC.Holder ref={refs[FormFieldIds.cardHolder]}>
           <label htmlFor={FormFieldIds.cardHolder}>Card Holder</label>
           <label htmlFor={FormFieldIds.cardHolder}>{props.holder}</label>
-        </Holder>
-        <Expires ref={refExpiration}>
-          <label htmlFor="cardExpirationM">Expires</label>
-          <label htmlFor="cardExpirationM">
-            {props.dateM || 'MM'}/{props.dateY || 'YY'}
+        </SC.Holder>
+        <SC.Expires ref={refs[FormFieldIds.cardExpiration]}>
+          <label htmlFor={FormFieldIds.cardExpirationM}>Expires</label>
+          <label htmlFor={FormFieldIds.cardExpirationM}>
+            {`${props.dateM || 'MM'}/${props.dateY || 'YY'}`}
           </label>
-        </Expires>
-      </FrontSide>
-      <BackSide isFront={isFront}>
-        <Logo back />
+        </SC.Expires>
+      </SC.FrontSide>
+      <SC.BackSide isFront={isFront}>
+        <SC.Logo icon={VisaIcon} back />
         <div className="black-line"></div>
-        <CVV htmlFor="cardCvv">{props.cvv}</CVV>
-      </BackSide>
-    </Wrapper>
+        <SC.CVV htmlFor={FormFieldIds.cardCvv}>{props.cvv}</SC.CVV>
+      </SC.BackSide>
+    </SC.Wrapper>
   );
 };
 
 Card.defaultProps = {
-  number: '**** **** **** ****',
+  number: '#### #### #### ####',
   // number: '8888 8888 8888 8888',
   holder: 'Full Name'
 };
