@@ -12,7 +12,11 @@ import { Form } from './components/Form';
 import Wrapper from './styled/Wrapper';
 import { CardFormStateT, CardFormActionT, CardFormContextT } from './types';
 
-const initialState: CardFormStateT = { currentFocus: undefined };
+const initialState: CardFormStateT = {
+  currentFocus: undefined,
+  cardNumber: undefined,
+  cardHolder: undefined
+};
 
 const cardFormReducer: Reducer<CardFormStateT, CardFormActionT> = (
   state,
@@ -28,6 +32,16 @@ const cardFormReducer: Reducer<CardFormStateT, CardFormActionT> = (
       return {
         ...state,
         currentFocus: undefined
+      };
+    case 'update_card_number':
+      return {
+        ...state,
+        cardNumber: action.payload
+      };
+    case 'update_card_holder':
+      return {
+        ...state,
+        cardHolder: action.payload
       };
     default:
       return state;

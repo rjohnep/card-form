@@ -7,6 +7,7 @@ import { FormFieldIds } from './types';
 
 export const Form: FC = () => {
   const [isFocused, setFocus] = useState(false);
+  const [cardNumber, setCardNumber] = useState('');
   const { dispatch } = useCardFormContext();
 
   const onFormInputFocus = (
@@ -27,6 +28,7 @@ export const Form: FC = () => {
     }
   };
 
+  // trigger reset current focus if focus is out
   useEffect(() => {
     const timer = setTimeout(() => {
       if (!isFocused) {
@@ -43,17 +45,30 @@ export const Form: FC = () => {
     setFocus(false);
   };
 
+  const onNumberChange = (e): void => {
+    if (e.target && dispatch) {
+      setCardNumber(e.target.value);
+      dispatch({
+        type: 'update_card_number',
+        payload: e.target.value
+      });
+    }
+  };
+
   return (
     <Wrapper>
       <Field>
         <label htmlFor={FormFieldIds.cardNumber}>Card Number</label>
         <input
-          type="number"
+          type="text"
           id={FormFieldIds.cardNumber}
           data-ref={FormFieldIds.cardNumber}
           autoComplete="off"
           onFocus={(e): void => onFormInputFocus(e)}
           onBlur={onBlur}
+          onChange={onNumberChange}
+          value={cardNumber}
+          maxLength={16}
         />
       </Field>
 

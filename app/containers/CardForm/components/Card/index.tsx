@@ -47,6 +47,13 @@ export const Card: FC<CardPropsT> = (props: CardPropsT) => {
     }
   }, [cardFormState]);
 
+  const getCardNumber = (str = ''): string => {
+    const number = str.split('');
+    const hash = Array(16 - number.length).fill('#');
+
+    return number.concat(hash).join('');
+  };
+
   return (
     <SC.Wrapper>
       <SC.FrontSide isFront={isFront}>
@@ -57,7 +64,7 @@ export const Card: FC<CardPropsT> = (props: CardPropsT) => {
           ref={refs[FormFieldIds.cardNumber]}
           htmlFor={FormFieldIds.cardNumber}
         >
-          {props.number}
+          {getCardNumber(cardFormState && cardFormState.cardNumber)}
         </SC.Number>
         <SC.Holder ref={refs[FormFieldIds.cardHolder]}>
           <label htmlFor={FormFieldIds.cardHolder}>Card Holder</label>

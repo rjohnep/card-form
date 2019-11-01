@@ -1,11 +1,19 @@
 import { Dispatch } from 'react';
 
+type ActionsT =
+  | 'update_current_focus'
+  | 'reset_current_focus'
+  | 'update_card_number'
+  | 'update_card_holder';
+
 export type CardFormStateT = {
   currentFocus: string | undefined;
+  cardNumber: string | undefined;
+  cardHolder: string | undefined;
 };
 
 export type CardFormActionT = {
-  type: 'update_current_focus' | 'reset_current_focus';
+  type: ActionsT;
   payload?: string;
 };
 
