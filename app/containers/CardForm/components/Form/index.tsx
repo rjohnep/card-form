@@ -1,4 +1,4 @@
-import React, { FC, FocusEvent } from 'react';
+import React, { FC, FocusEvent, useState, useEffect } from 'react';
 
 import { useCardFormContext } from '@app/containers/CardForm';
 
@@ -6,12 +6,14 @@ import { Wrapper, Field, Row } from './styled';
 import { FormFieldIds } from './types';
 
 export const Form: FC = () => {
+  const [isFocused, setFocus] = useState(false);
   const { dispatch } = useCardFormContext();
 
   const onFormInputFocus = (
     e: FocusEvent<HTMLInputElement | HTMLSelectElement>
   ): void => {
     if (e.target && dispatch) {
+      setFocus(true);
       dispatch({
         type: 'update_current_focus',
         payload: e.target.dataset.ref
@@ -25,6 +27,22 @@ export const Form: FC = () => {
     }
   };
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (!isFocused) {
+        onFormInputBlur();
+      }
+    }, 300);
+
+    return (): void => {
+      clearInterval(timer);
+    };
+  }, [isFocused]);
+
+  const onBlur = (): void => {
+    setFocus(false);
+  };
+
   return (
     <Wrapper>
       <Field>
@@ -35,7 +53,7 @@ export const Form: FC = () => {
           data-ref={FormFieldIds.cardNumber}
           autoComplete="off"
           onFocus={(e): void => onFormInputFocus(e)}
-          onBlur={onFormInputBlur}
+          onBlur={onBlur}
         />
       </Field>
 
@@ -47,7 +65,7 @@ export const Form: FC = () => {
           data-ref={FormFieldIds.cardHolder}
           autoComplete="off"
           onFocus={(e): void => onFormInputFocus(e)}
-          onBlur={onFormInputBlur}
+          onBlur={onBlur}
         />
       </Field>
 
@@ -59,7 +77,7 @@ export const Form: FC = () => {
             data-ref={FormFieldIds.cardExpiration}
             defaultValue="Month"
             onFocus={(e): void => onFormInputFocus(e)}
-            onBlur={onFormInputBlur}
+            onBlur={onBlur}
           >
             <option disabled>Month</option>
             <option>1</option>
@@ -70,7 +88,7 @@ export const Form: FC = () => {
             data-ref={FormFieldIds.cardExpiration}
             defaultValue="Year"
             onFocus={(e): void => onFormInputFocus(e)}
-            onBlur={onFormInputBlur}
+            onBlur={onBlur}
           >
             <option disabled>Year</option>
             <option>2019</option>
@@ -87,7 +105,7 @@ export const Form: FC = () => {
             maxLength={4}
             autoComplete="off"
             onFocus={(e): void => onFormInputFocus(e)}
-            onBlur={onFormInputBlur}
+            onBlur={onBlur}
           />
         </Field>
       </Row>
