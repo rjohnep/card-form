@@ -49,9 +49,20 @@ export const Card: FC<CardPropsT> = (props: CardPropsT) => {
 
   const getCardNumber = (str = ''): string => {
     const number = str.split('');
-    const hash = Array(16 - number.length).fill('#');
 
-    return number.concat(hash).join('');
+    return Array(16)
+      .fill('#')
+      .map((h, i) => {
+        if (number[i]) {
+          if (i > 3 && i < 12) {
+            return '*';
+          }
+          return number[i];
+        }
+
+        return h;
+      })
+      .join('');
   };
 
   return (
