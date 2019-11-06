@@ -14,6 +14,7 @@ export const Card: FC<CardPropsT> = (props: CardPropsT) => {
   const [focusMeta, updateFocusMeta] = useState<CardFocusMetaT | undefined>(
     undefined
   );
+  // TODO: set default context state
   const { state: cardFormState } = useCardFormContext();
 
   const refs = {
@@ -52,7 +53,7 @@ export const Card: FC<CardPropsT> = (props: CardPropsT) => {
 
     return Array(16)
       .fill('#')
-      .map((h, i) => {
+      .map((hash, i) => {
         if (number[i]) {
           if (i > 3 && i < 12) {
             return '*';
@@ -60,7 +61,7 @@ export const Card: FC<CardPropsT> = (props: CardPropsT) => {
           return number[i];
         }
 
-        return h;
+        return hash;
       })
       .join('');
   };
@@ -79,7 +80,7 @@ export const Card: FC<CardPropsT> = (props: CardPropsT) => {
         </SC.Number>
         <SC.Holder ref={refs[FormFieldIds.cardHolder]}>
           <label htmlFor={FormFieldIds.cardHolder}>Card Holder</label>
-          <label htmlFor={FormFieldIds.cardHolder}>{props.holder}</label>
+          <label htmlFor={FormFieldIds.cardHolder}>{cardFormState && cardFormState.cardHolder}</label>
         </SC.Holder>
         <SC.Expires ref={refs[FormFieldIds.cardExpiration]}>
           <label htmlFor={FormFieldIds.cardExpirationM}>Expires</label>
@@ -95,10 +96,4 @@ export const Card: FC<CardPropsT> = (props: CardPropsT) => {
       </SC.BackSide>
     </SC.Wrapper>
   );
-};
-
-Card.defaultProps = {
-  number: '#### #### #### ####',
-  // number: '8888 8888 8888 8888',
-  holder: 'Full Name'
 };

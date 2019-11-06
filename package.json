@@ -12,13 +12,22 @@
     "prebuild": "npm run build:clean",
     "build": "webpack --config internals/webpack/webpack.prod.js --color -p --progress --hide-modules --display-optimization-bailout",
     "build:clean": "rimraf ./build",
-    "start": "webpack-dev-server --config internals/webpack/webpack.dev.js --color"
+    "start": "webpack-dev-server --config internals/webpack/webpack.dev.js --color",
+    "lint:eslint": "eslint --ignore-path .gitignore",
+    "lint:eslint:fix": "eslint --ignore-path .gitignore --fix",
+    "lint:staged": "lint-staged"
   },
   "browserslist": [
     "last 2 versions",
     "> 1%",
     "IE 10"
   ],
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "npm run lint:eslint"
+    ]
+  },
+  "pre-commit": "lint:staged",
   "dependencies": {
     "prop-types": "^15.7.2",
     "react": "16.11.0",
@@ -54,6 +63,8 @@
     "eslint-plugin-react-hooks": "2.2.0",
     "file-loader": "4.2.0",
     "html-webpack-plugin": "3.2.0",
+    "lint-staged": "^9.4.2",
+    "pre-commit": "^1.2.2",
     "react-app-polyfill": "1.0.4",
     "rimraf": "3.0.0",
     "style-loader": "1.0.0",

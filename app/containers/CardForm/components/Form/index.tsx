@@ -1,4 +1,4 @@
-import React, { FC, FocusEvent, useState, useEffect } from 'react';
+import React, { FC, FocusEvent, useState, useEffect, ChangeEvent } from 'react';
 
 import { useCardFormContext } from '@app/containers/CardForm';
 
@@ -8,6 +8,7 @@ import { FormFieldIds } from './types';
 export const Form: FC = () => {
   const [isFocused, setFocus] = useState(false);
   const [cardNumber, setCardNumber] = useState('');
+  const [cardHolder, setCardHolder] = useState('');
   const { dispatch } = useCardFormContext();
 
   const onFormInputFocus = (
@@ -47,11 +48,21 @@ export const Form: FC = () => {
     setFocus(false);
   };
 
-  const onNumberChange = (e): void => {
+  const onNumberChange = (e: ChangeEvent<HTMLInputElement>): void => {
     if (e.target && dispatch) {
       setCardNumber(e.target.value);
       dispatch({
         type: 'update_card_number',
+        payload: e.target.value
+      });
+    }
+  };
+
+  const onHolderChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    if (e.target && dispatch) {
+      setCardHolder(e.target.value);
+      dispatch({
+        type: 'update_card_holder',
         payload: e.target.value
       });
     }
@@ -83,6 +94,8 @@ export const Form: FC = () => {
           autoComplete="off"
           onFocus={(e): void => onFormInputFocus(e)}
           onBlur={onBlur}
+          onChange={onHolderChange}
+          value={cardHolder}
         />
       </Field>
 
