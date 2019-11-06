@@ -22,7 +22,7 @@ const CommomCardStyle = css`
   backface-visibility: hidden;
 `;
 
-export const Logo = styled(Icon)<{ back?: boolean }>`
+export const Logo = styled(Icon) <{ back?: boolean }>`
   z-index: 10;
 
   position: absolute;
@@ -32,9 +32,8 @@ export const Logo = styled(Icon)<{ back?: boolean }>`
   max-width: 100px;
   height: 70px;
 
-  ${({ back }): undefined | false | string =>
-    back &&
-    `
+  ${({ back }): undefined | false | string => back
+    && `
     bottom: 25px;
     top: auto;
     background: #000;
@@ -49,8 +48,8 @@ export const FrontSide = styled.div<{ isFront: boolean }>`
 
   transform: perspective(2000px) rotateY(0deg) rotateX(0deg) rotate(0deg);
 
-  ${({ isFront }): false | string =>
-    !isFront && `transform: perspective(1000px) rotateY(180deg) rotateX(0deg);`}
+  ${({ isFront }): false | string => !isFront
+    && 'transform: perspective(1000px) rotateY(180deg) rotateX(0deg);'}
 `;
 
 export const BackSide = styled.div<{ isFront: boolean }>`
@@ -66,9 +65,8 @@ export const BackSide = styled.div<{ isFront: boolean }>`
 
   transform: perspective(2000px) rotateY(-180deg) rotateX(0deg) rotate(0deg);
 
-  ${({ isFront }): false | string =>
-    !isFront &&
-    ` transform: perspective(1000px) rotateY(0) rotateX(0deg) rotateZ(0deg);`}
+  ${({ isFront }): false | string => !isFront
+    && 'transform: perspective(1000px) rotateY(0) rotateX(0deg) rotateZ(0deg);'}
 
   .black-line {
     position: absolute;
@@ -190,8 +188,7 @@ export const Hightlighter = styled.div<{ meta: CardFocusMetaT | undefined }>`
 
   transform: translate(-12px, -8px);
 
-  ${({ meta }): FlattenSimpleInterpolation | undefined =>
-    meta && focusMetaStyle(meta)};
+  ${({ meta }): FlattenSimpleInterpolation | undefined => meta && focusMetaStyle(meta)};
 
   transition: all 0.3s;
 `;

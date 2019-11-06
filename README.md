@@ -1,1 +1,4 @@
-Fantastic Card Form | TS | React
+CODE CHALLENGE #NOVEMBER
+
+Fantastic Card Form - React | TS |
+Based on own starter.

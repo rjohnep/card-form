@@ -25,8 +25,8 @@ export const Card: FC<CardPropsT> = (props: CardPropsT) => {
   useEffect(() => {
     if (cardFormState && cardFormState.currentFocus) {
       if (
-        (cardFormState.currentFocus === FormFieldIds.cardCvv && isFront) ||
-        (cardFormState.currentFocus !== FormFieldIds.cardCvv && !isFront)
+        (cardFormState.currentFocus === FormFieldIds.cardCvv && isFront)
+        || (cardFormState.currentFocus !== FormFieldIds.cardCvv && !isFront)
       ) {
         toggleSide(!isFront);
       }
@@ -90,7 +90,7 @@ export const Card: FC<CardPropsT> = (props: CardPropsT) => {
       </SC.FrontSide>
       <SC.BackSide isFront={isFront}>
         <SC.Logo icon={VisaIcon} back />
-        <div className="black-line"></div>
+        <div className="black-line" />
         <SC.CVV htmlFor={FormFieldIds.cardCvv}>{props.cvv}</SC.CVV>
       </SC.BackSide>
     </SC.Wrapper>
