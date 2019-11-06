@@ -54,11 +54,11 @@ export const Field = styled.div<{ group?: boolean; short?: boolean }>`
     border-radius: 5px;
   }
 
-  ${({ group }): undefined | false | FlattenSimpleInterpolation =>
-    group && groupedStyle}
+  ${({ group }): undefined | false | FlattenSimpleInterpolation => group
+    && groupedStyle}
 
-  ${({ short }): undefined | false | FlattenSimpleInterpolation =>
-    short && shortStyle}
+  ${({ short }): undefined | false | FlattenSimpleInterpolation => short
+    && shortStyle}
 `;
 
 export const Row = styled.div`

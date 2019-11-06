@@ -188,7 +188,8 @@ export const Hightlighter = styled.div<{ meta: CardFocusMetaT | undefined }>`
 
   transform: translate(-12px, -8px);
 
-  ${({ meta }): FlattenSimpleInterpolation | undefined => meta && focusMetaStyle(meta)};
+  ${({ meta }): FlattenSimpleInterpolation | undefined => meta
+    && focusMetaStyle(meta)};
 
   transition: all 0.3s;
 `;

@@ -1,7 +1,5 @@
-import baseStyled, {
-  ThemedStyledInterface,
-  createGlobalStyle
-} from 'styled-components';
+import baseStyled, { ThemedStyledInterface,
+  createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
   body {
