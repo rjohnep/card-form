@@ -8,7 +8,7 @@ import { theme, GlobalStyle } from './theme';
 
 const MOUNT_NODE = document.getElementById('app');
 
-const render = () => {
+const render = (): void => {
   ReactDOM.render(
     <ThemeProvider theme={theme}>
       <Fragment>

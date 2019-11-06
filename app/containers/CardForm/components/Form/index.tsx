@@ -24,7 +24,9 @@ export const Form: FC = () => {
 
   const onFormInputBlur = (): void => {
     if (dispatch) {
-      dispatch({ type: 'reset_current_focus' });
+      dispatch({
+        type: 'reset_current_focus'
+      });
     }
   };
 

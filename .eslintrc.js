@@ -33,25 +33,34 @@ module.exports = {
   },
   rules: {
     "max-len": ["error", { code: 80 }],
-    indent: ["error", 2],
+    indent: [
+      2,
+      2,
+      {
+        SwitchCase: 1
+      }
+    ],
     semi: ["error", "always"],
     "comma-dangle": ["error", "never"],
     "object-curly-newline": ["error", {
       "ObjectExpression": "always",
       "ObjectPattern": { "multiline": true },
-      "ImportDeclaration": "never",
+      // "ImportDeclaration": "never",
       "ExportDeclaration": { "multiline": true, "minProperties": 3 }
     }],
-    // "react/jsx-closing-bracket-location": [1, "line-aligned"],
+    'no-unused-vars': 2,
+    "arrow-body-style": [2, "as-needed"],
     "arrow-parens": ["error", "always"],
     "jsx-a11y/label-has-associated-control": 0,
-    "import/no-unresolved": 0,
     // 'import/no-named-as-default': 0,
+    "import/no-unresolved": 0,
     'import/prefer-default-export': 0,
-    "arrow-body-style": [2, "as-needed"],
+    // "react/jsx-closing-bracket-location": [1, "line-aligned"],
+    'react/jsx-uses-vars': 2,
     "react/jsx-first-prop-new-line": [2, "multiline"],
     "react/jsx-uses-vars": 2,
     "react/sort-comp": 0,
-    'react/destructuring-assignment': 0
+    'react/destructuring-assignment': 0,
+    "react/jsx-fragments": [2, "element"]
   }
 };

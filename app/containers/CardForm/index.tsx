@@ -53,14 +53,19 @@ const CardFormContext = createContext<CardFormContextT>({
   dispatch: undefined
 });
 
-export const useCardFormContext = (): CardFormContextT =>
-  useContext(CardFormContext);
+export const useCardFormContext = (): CardFormContextT => useContext(
+  CardFormContext
+);
 
 export const CardForm = (): ReactElement => {
   const [state, dispatch] = useReducer(cardFormReducer, initialState);
 
   return (
-    <CardFormContext.Provider value={{ state, dispatch }}>
+    <CardFormContext.Provider
+      value={{
+        state, dispatch
+      }}
+    >
       <Wrapper>
         <Card />
         <Form />
