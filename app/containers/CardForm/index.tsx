@@ -1,80 +1,67 @@
-import React, {
-  ReactElement,
-  Reducer,
-  useReducer,
-  createContext,
-  useContext
-} from 'react';
+import React, { ReactElement, useState } from 'react';
 
 import { Card } from './components/Card';
 import { Form } from './components/Form';
 
 import Wrapper from './styled/Wrapper';
-import { CardFormStateT, CardFormActionT, CardFormContextT } from './types';
+import { CardFormStateT } from './types';
+
+import { FormFieldIds } from './components/Form/types';
 
 const initialState: CardFormStateT = {
   currentFocus: undefined,
   cardNumber: undefined,
-  cardHolder: 'Full Name'
+  cardHolder: 'Full Name',
+  cardType: undefined,
+  cvv: undefined,
+  dateM: undefined,
+  dateY: undefined
 };
-
-const cardFormReducer: Reducer<CardFormStateT, CardFormActionT> = (
-  state,
-  action
-) => {
-  switch (action.type) {
-    case 'update_current_focus':
-      return {
-        ...state,
-        currentFocus: action.payload
-      };
-    case 'reset_current_focus':
-      return {
-        ...state,
-        currentFocus: undefined
-      };
-    case 'update_card_number':
-      return {
-        ...state,
-        cardNumber: action.payload
-      };
-    case 'update_card_holder':
-      return {
-        ...state,
-        cardHolder: action.payload ? action.payload : initialState.cardHolder
-      };
-    default:
-      return state;
-  }
-};
-
-const CardFormContext = createContext<CardFormContextT>({
-  state: undefined,
-  dispatch: undefined
-});
-
-export const useCardFormContext = (): CardFormContextT => useContext(
-  CardFormContext
-);
 
 export const CardForm = (): ReactElement => {
-  const [state, dispatch] = useReducer(cardFormReducer, initialState);
+  const [cardState, updateCardState] = useState(initialState);
 
-  // const formProps = {
-  //   onFocusUpdate: ,
-  //   onFocusreset:
-  // };
+  const onFocusUpdate = (field: FormFieldIds) => updateCardState(
+    (prevState) => ({
+      ...prevState,
+      currentFocus: field
+    })
+  );
+
+  const onFocusReset = () => updateCardState(
+    (prevState) => ({
+      ...prevState,
+      currentFocus: initialState.currentFocus
+    })
+  );
+
+  const onCCNumberChange = (cardNumber: string) => updateCardState(
+    (prevState) => ({
+      ...prevState,
+      cardNumber
+    })
+  );
+
+  const onCCHolderChange = (cardHolder: string) => updateCardState(
+    (prevState) => ({
+      ...prevState,
+      cardHolder
+    })
+  );
 
   return (
-    <CardFormContext.Provider
-      value={{
-        state, dispatch
-      }}
-    >
-      <Wrapper>
-        <Card />
-        <Form />
-      </Wrapper>
-    </CardFormContext.Provider>
+    <Wrapper>
+      <Card
+        state={cardState}
+      />
+
+      <Form
+        state={cardState}
+        onFocusUpdate={onFocusUpdate}
+        onFocusReset={onFocusReset}
+        onCCNumberChange={onCCNumberChange}
+        onCCHolderChange={onCCHolderChange}
+      />
+    </Wrapper>
   );
 };

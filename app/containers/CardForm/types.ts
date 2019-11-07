@@ -1,23 +1,18 @@
-import { Dispatch } from 'react';
+import { FormFieldIds } from './components/Form/types';
 
-type ActionsT =
-  | 'update_current_focus'
-  | 'reset_current_focus'
-  | 'update_card_number'
-  | 'update_card_holder';
+export enum CardTypesE {
+  Visa,
+  Amex,
+  Mastercard,
+  Discover
+}
 
 export type CardFormStateT = {
-  currentFocus: string | undefined;
+  currentFocus: FormFieldIds | undefined;
+  cardType: CardTypesE | undefined;
   cardNumber: string | undefined;
-  cardHolder: string | undefined;
-};
-
-export type CardFormActionT = {
-  type: ActionsT;
-  payload?: string;
-};
-
-export type CardFormContextT = {
-  state: CardFormStateT | undefined;
-  dispatch: Dispatch<CardFormActionT> | undefined;
+  cardHolder: string;
+  dateM: number | undefined;
+  dateY: number | undefined;
+  cvv: number | undefined;
 };

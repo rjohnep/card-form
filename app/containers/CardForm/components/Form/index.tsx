@@ -1,35 +1,34 @@
 import React, { FC, FocusEvent, useState, useEffect, ChangeEvent } from 'react';
 import InputMask from 'react-input-mask';
 
-import { useCardFormContext } from '@app/containers/CardForm';
-
 import { Wrapper, Field, Row } from './styled';
-import { FormFieldIds } from './types';
+import { FormFieldIds, FormPropsT } from './types';
 
-export const Form: FC = () => {
+export const Form: FC<FormPropsT> = (props: FormPropsT) => {
   const [isFocused, setFocus] = useState(false);
-  const [cardNumber, setCardNumber] = useState('');
-  const [cardHolder, setCardHolder] = useState('');
-  const { dispatch } = useCardFormContext();
 
   const onFormInputFocus = (
     e: FocusEvent<HTMLInputElement | HTMLSelectElement>
   ): void => {
-    if (e.target && dispatch) {
-      setFocus(true);
-      dispatch({
-        type: 'update_current_focus',
-        payload: e.target.dataset.ref
-      });
+    setFocus(true);
+
+    switch (e.target.dataset.ref) {
+      case FormFieldIds.cardNumber:
+        return props.onFocusUpdate(FormFieldIds.cardNumber);
+      case FormFieldIds.cardHolder:
+        return props.onFocusUpdate(FormFieldIds.cardHolder);
+      case FormFieldIds.cardExpirationM:
+      case FormFieldIds.cardExpirationY:
+        return props.onFocusUpdate(FormFieldIds.cardExpiration);
+      case FormFieldIds.cardCvv:
+        return props.onFocusUpdate(FormFieldIds.cardCvv);
+      default:
+        return undefined;
     }
   };
 
   const onFormInputBlur = (): void => {
-    if (dispatch) {
-      dispatch({
-        type: 'reset_current_focus'
-      });
-    }
+    props.onFocusReset();
   };
 
   // trigger reset current focus if focus is out
@@ -49,25 +48,13 @@ export const Form: FC = () => {
     setFocus(false);
   };
 
-  const onNumberChange = (e: ChangeEvent<HTMLInputElement>): void => {
-    if (e.target && dispatch) {
-      setCardNumber(e.target.value);
-      dispatch({
-        type: 'update_card_number',
-        payload: e.target.value
-      });
-    }
-  };
+  const onNumberChange = (
+    e: ChangeEvent<HTMLInputElement>
+  ): void => props.onCCNumberChange(e.target.value);
 
-  const onHolderChange = (e: ChangeEvent<HTMLInputElement>): void => {
-    if (e.target && dispatch) {
-      setCardHolder(e.target.value);
-      dispatch({
-        type: 'update_card_holder',
-        payload: e.target.value
-      });
-    }
-  };
+  const onHolderChange = (
+    e: ChangeEvent<HTMLInputElement>
+  ): void => props.onCCHolderChange(e.target.value);
 
   return (
     <Wrapper>
@@ -82,7 +69,7 @@ export const Form: FC = () => {
           onFocus={(e): void => onFormInputFocus(e)}
           onBlur={onBlur}
           onChange={onNumberChange}
-          value={cardNumber}
+          value={props.state.cardNumber}
         />
       </Field>
 
@@ -96,7 +83,7 @@ export const Form: FC = () => {
           onFocus={(e): void => onFormInputFocus(e)}
           onBlur={onBlur}
           onChange={onHolderChange}
-          value={cardHolder}
+          value={props.state.cardHolder}
         />
       </Field>
 

@@ -3,7 +3,6 @@ import React, { FC, useState, useRef, useEffect } from 'react';
 import VisaIcon from '@assets/icons/visa-pay-logo.svg';
 // import VisaIcon from '@assets/icons/master-card-logo.svg';
 
-import { useCardFormContext } from '@app/containers/CardForm';
 import { FormFieldIds } from '../Form/types';
 
 import * as SC from './styled';
@@ -14,8 +13,6 @@ export const Card: FC<CardPropsT> = (props: CardPropsT) => {
   const [focusMeta, updateFocusMeta] = useState<CardFocusMetaT | undefined>(
     undefined
   );
-  // TODO: set default context state
-  const { state: cardFormState } = useCardFormContext();
 
   const refs = {
     [FormFieldIds.cardNumber]: useRef(null),
@@ -23,16 +20,18 @@ export const Card: FC<CardPropsT> = (props: CardPropsT) => {
     [FormFieldIds.cardExpiration]: useRef(null)
   };
 
+  const { currentFocus } = props.state;
+
   useEffect(() => {
-    if (cardFormState && cardFormState.currentFocus) {
+    if (currentFocus) {
       if (
-        (cardFormState.currentFocus === FormFieldIds.cardCvv && isFront)
-        || (cardFormState.currentFocus !== FormFieldIds.cardCvv && !isFront)
+        (currentFocus === FormFieldIds.cardCvv && isFront)
+        || (currentFocus !== FormFieldIds.cardCvv && !isFront)
       ) {
         toggleSide(!isFront);
       }
 
-      const targetRef = refs[cardFormState.currentFocus];
+      const targetRef = refs[currentFocus];
 
       if (targetRef) {
         updateFocusMeta({
@@ -46,7 +45,7 @@ export const Card: FC<CardPropsT> = (props: CardPropsT) => {
       // TODO: debounce focus reseting
       updateFocusMeta(undefined);
     }
-  }, [cardFormState]);
+  }, [currentFocus]);
 
   const getCardNumber = (str = ''): string => {
     const number = str.split('');
@@ -76,23 +75,25 @@ export const Card: FC<CardPropsT> = (props: CardPropsT) => {
           ref={refs[FormFieldIds.cardNumber]}
           htmlFor={FormFieldIds.cardNumber}
         >
-          {getCardNumber(cardFormState && cardFormState.cardNumber)}
+          {getCardNumber(props.state.cardNumber)}
         </SC.Number>
         <SC.Holder ref={refs[FormFieldIds.cardHolder]}>
           <label htmlFor={FormFieldIds.cardHolder}>Card Holder</label>
-          <label htmlFor={FormFieldIds.cardHolder}>{cardFormState && cardFormState.cardHolder}</label>
+          <label htmlFor={FormFieldIds.cardHolder}>
+            {props.state.cardHolder}
+          </label>
         </SC.Holder>
         <SC.Expires ref={refs[FormFieldIds.cardExpiration]}>
           <label htmlFor={FormFieldIds.cardExpirationM}>Expires</label>
           <label htmlFor={FormFieldIds.cardExpirationM}>
-            {`${props.dateM || 'MM'}/${props.dateY || 'YY'}`}
+            {`${props.state.dateM || 'MM'}/${props.state.dateY || 'YY'}`}
           </label>
         </SC.Expires>
       </SC.FrontSide>
       <SC.BackSide isFront={isFront}>
         <SC.Logo icon={VisaIcon} back />
         <div className="black-line" />
-        <SC.CVV htmlFor={FormFieldIds.cardCvv}>{props.cvv}</SC.CVV>
+        <SC.CVV htmlFor={FormFieldIds.cardCvv}>{props.state.cvv}</SC.CVV>
       </SC.BackSide>
     </SC.Wrapper>
   );

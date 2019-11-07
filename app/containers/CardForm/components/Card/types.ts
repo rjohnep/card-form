@@ -1,9 +1,7 @@
+import { CardFormStateT } from '@app/containers/CardForm/types';
+
 export type CardPropsT = {
-  number: string;
-  holder: string;
-  dateM: number;
-  dateY: number;
-  cvv: number;
+  state: CardFormStateT
 };
 
 export type CardFocusMetaT = {
