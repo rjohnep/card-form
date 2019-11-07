@@ -15,7 +15,7 @@ import { CardFormStateT, CardFormActionT, CardFormContextT } from './types';
 const initialState: CardFormStateT = {
   currentFocus: undefined,
   cardNumber: undefined,
-  cardHolder: undefined
+  cardHolder: 'Full Name'
 };
 
 const cardFormReducer: Reducer<CardFormStateT, CardFormActionT> = (
@@ -41,7 +41,7 @@ const cardFormReducer: Reducer<CardFormStateT, CardFormActionT> = (
     case 'update_card_holder':
       return {
         ...state,
-        cardHolder: action.payload
+        cardHolder: action.payload ? action.payload : initialState.cardHolder
       };
     default:
       return state;
@@ -59,6 +59,11 @@ export const useCardFormContext = (): CardFormContextT => useContext(
 
 export const CardForm = (): ReactElement => {
   const [state, dispatch] = useReducer(cardFormReducer, initialState);
+
+  // const formProps = {
+  //   onFocusUpdate: ,
+  //   onFocusreset:
+  // };
 
   return (
     <CardFormContext.Provider

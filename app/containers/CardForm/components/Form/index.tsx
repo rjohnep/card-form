@@ -1,4 +1,5 @@
 import React, { FC, FocusEvent, useState, useEffect, ChangeEvent } from 'react';
+import InputMask from 'react-input-mask';
 
 import { useCardFormContext } from '@app/containers/CardForm';
 
@@ -72,8 +73,9 @@ export const Form: FC = () => {
     <Wrapper>
       <Field>
         <label htmlFor={FormFieldIds.cardNumber}>Card Number</label>
-        <input
-          type="text"
+        <InputMask
+          mask="9999 9999 9999 9999"
+          maskChar=" "
           id={FormFieldIds.cardNumber}
           data-ref={FormFieldIds.cardNumber}
           autoComplete="off"
@@ -81,7 +83,6 @@ export const Form: FC = () => {
           onBlur={onBlur}
           onChange={onNumberChange}
           value={cardNumber}
-          maxLength={16}
         />
       </Field>
 

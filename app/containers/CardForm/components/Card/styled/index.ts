@@ -84,7 +84,8 @@ export const Number = styled.label`
   cursor: pointer;
   position: absolute;
   top: calc(50% - 21px);
-  left: 25px;
+  left: 7%;
+  width: 86%;
 
   font-size: 28px;
   line-height: 28px;
@@ -100,6 +101,7 @@ export const Holder = styled.div`
   left: 25px;
   bottom: 25px;
   max-width: 60%;
+  width: 100%;
 
   display: flex;
   flex-direction: column;
