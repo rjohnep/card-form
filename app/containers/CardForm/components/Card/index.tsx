@@ -1,7 +1,6 @@
 import React, { FC, useState, useRef, useEffect } from 'react';
 
 import VisaIcon from '@assets/icons/visa-pay-logo.svg';
-// import VisaIcon from '@assets/icons/master-card-logo.svg';
 
 import { FormFieldIds } from '../Form/types';
 
