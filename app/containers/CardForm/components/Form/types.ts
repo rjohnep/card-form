@@ -10,7 +10,7 @@ export enum FormFieldIds {
 }
 
 export type FormPropsT = {
-  state: CardFormStateT,
+  state: CardFormStateT;
   onFocusUpdate: (field: FormFieldIds) => void;
   onFocusReset: () => void;
   onCCNumberChange: (number: string) => void;

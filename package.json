@@ -13,8 +13,8 @@
     "build": "webpack --config internals/webpack/webpack.prod.js --color -p --progress --hide-modules --display-optimization-bailout",
     "build:clean": "rimraf ./build",
     "start": "webpack-dev-server --config internals/webpack/webpack.dev.js --color",
-    "lint:eslint": "eslint --ignore-path .gitignore",
-    "lint:eslint:fix": "eslint --ignore-path .gitignore --fix",
+    "lint:eslint": "eslint --ext .js,.jsx,.ts,.tsx app/",
+    "lint:eslint:fix": "npm run lint:eslint --fix",
     "lint:staged": "lint-staged"
   },
   "browserslist": [
@@ -24,7 +24,7 @@
   ],
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
-      "npm run lint:eslint"
+      "npm run lint:eslint:fix"
     ]
   },
   "pre-commit": "lint:staged",

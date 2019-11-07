@@ -1,7 +1,7 @@
 import { CardFormStateT } from '@app/containers/CardForm/types';
 
 export type CardPropsT = {
-  state: CardFormStateT
+  state: CardFormStateT;
 };
 
 export type CardFocusMetaT = {

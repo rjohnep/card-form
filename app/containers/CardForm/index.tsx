@@ -21,28 +21,28 @@ const initialState: CardFormStateT = {
 export const CardForm = (): ReactElement => {
   const [cardState, updateCardState] = useState(initialState);
 
-  const onFocusUpdate = (field: FormFieldIds) => updateCardState(
+  const onFocusUpdate = (field: FormFieldIds): void => updateCardState(
     (prevState) => ({
       ...prevState,
       currentFocus: field
     })
   );
 
-  const onFocusReset = () => updateCardState(
+  const onFocusReset = (): void => updateCardState(
     (prevState) => ({
       ...prevState,
       currentFocus: initialState.currentFocus
     })
   );
 
-  const onCCNumberChange = (cardNumber: string) => updateCardState(
+  const onCCNumberChange = (cardNumber: string): void => updateCardState(
     (prevState) => ({
       ...prevState,
       cardNumber
     })
   );
 
-  const onCCHolderChange = (cardHolder: string) => updateCardState(
+  const onCCHolderChange = (cardHolder: string): void => updateCardState(
     (prevState) => ({
       ...prevState,
       cardHolder
