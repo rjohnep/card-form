@@ -1,9 +1,11 @@
 import React, { FC } from 'react';
 
-export const Icon: FC<{
+type IconT = {
   className: string;
   icon: { id: string; viewBox: string };
-}> = (props) => (
+};
+
+export const Icon: FC<IconT> = (props: IconT) => (
   <svg viewBox={props.icon.viewBox} className={props.className}>
     <use xlinkHref={`#${props.icon.id}`} />
   </svg>
