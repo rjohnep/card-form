@@ -54,11 +54,19 @@ export const Card: FC<CardPropsT> = (props: CardPropsT) => {
         <SC.Hightlighter meta={focusMeta} />
 
         <SC.Logo icon={VisaIcon} />
+
         <SC.Number
           ref={refs[FormFieldIds.cardNumber]}
           htmlFor={FormFieldIds.cardNumber}
         >
-          {getCardNumber(props.state.cardNumber, props.state.cardType)}
+          {
+            getCardNumber(props.state.cardNumber, props.state.cardType).map(
+              (numberCharacter, i) => (
+                // eslint-disable-next-line react/no-array-index-key
+                <span key={`${numberCharacter}-${i}`}>{numberCharacter}</span>
+              )
+            )
+          }
         </SC.Number>
         <SC.Holder ref={refs[FormFieldIds.cardHolder]}>
           <label htmlFor={FormFieldIds.cardHolder}>Card Holder</label>

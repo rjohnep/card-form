@@ -79,7 +79,12 @@ export const BackSide = styled.div<{ isFront: boolean }>`
 `;
 
 export const Number = styled.label`
-  z-index: 10;
+  z-index: 10;;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
 
   cursor: pointer;
   position: absolute;
@@ -92,6 +97,12 @@ export const Number = styled.label`
   font-weight: bold;
   letter-spacing: 5px;
   text-shadow: 0 8px 30px #fff;
+
+  span {
+    width: 20px;
+    text-align: center;
+    flex-shrink: 0;
+  }
 `;
 
 export const Holder = styled.div`

@@ -40,7 +40,7 @@ export const getCardNumberMask = (
 export const getCardNumber = (
   str: string,
   cardType: CardTypesE | undefined
-): string => {
+): string[] => {
   const inputMask = getCardNumberMask(cardType);
   const number = str.split('');
 
@@ -59,6 +59,5 @@ export const getCardNumber = (
       }
 
       return /\s/.test(mc) ? ' ' : '#';
-    })
-    .join('');
+    });
 };
