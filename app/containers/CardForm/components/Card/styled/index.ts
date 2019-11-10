@@ -159,6 +159,7 @@ export const Expires = styled.div`
 
   label {
     cursor: pointer;
+    text-align: right;
   }
 
   label:first-child {
@@ -202,7 +203,7 @@ export const CVV = styled.label`
 const focusMetaStyle = (
   meta: CardFocusMetaT
 ): FlattenSimpleInterpolation => css`
-  /* visibility: visible; */
+  visibility: visible;
 
   width: ${meta.width};
   height: ${meta.height};
@@ -212,7 +213,7 @@ const focusMetaStyle = (
 export const Hightlighter = styled.div<{ meta: CardFocusMetaT | undefined }>`
   z-index: 1;
 
-  /* visibility: hidden; */
+  visibility: hidden;
   position: absolute;
   padding: 5px 10px;
 

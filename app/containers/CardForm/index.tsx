@@ -62,7 +62,7 @@ export const CardForm = (): ReactElement => {
   const onYaerChange = (year: number): void => updateCardState(
     (prevState): CardFormStateT => ({
       ...prevState,
-      dateY: year
+      dateY: year - 2000 // Christ correction
     })
   );
 
