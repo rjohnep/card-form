@@ -13,6 +13,9 @@ export type FormPropsT = {
   state: CardFormStateT;
   onFocusUpdate: (field: FormFieldIds) => void;
   onFocusReset: () => void;
-  onCCNumberChange: (number: string) => void;
-  onCCHolderChange: (holder: string) => void;
+  onNumberChange: (number: string) => void;
+  onHolderChange: (holder: string) => void;
+  onMonthChange: (month: number) => void;
+  onYaerChange: (year: number) => void;
+  onCvvChange: (cvv: number) => void;
 };

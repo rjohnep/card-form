@@ -56,11 +56,23 @@ export const Form: FC<FormPropsT> = (props: FormPropsT) => {
 
   const onNumberChange = (
     e: ChangeEvent<HTMLInputElement>
-  ): void => props.onCCNumberChange(e.target.value.trim());
+  ): void => props.onNumberChange(e.target.value.trim());
 
   const onHolderChange = (
     e: ChangeEvent<HTMLInputElement>
-  ): void => props.onCCHolderChange(e.target.value);
+  ): void => props.onHolderChange(e.target.value);
+
+  const onExpirationMonthChange = (
+    e: ChangeEvent<HTMLSelectElement>
+  ): void => props.onMonthChange(Number(e.target.value));
+
+  const onExpirationYearChange = (
+    e: ChangeEvent<HTMLSelectElement>
+  ): void => props.onYaerChange(Number(e.target.value));
+
+  const onCvvChange = (
+    e: ChangeEvent<HTMLInputElement>
+  ): void => props.onCvvChange(Number(e.target.value));
 
   return (
     <Wrapper>
@@ -102,6 +114,7 @@ export const Form: FC<FormPropsT> = (props: FormPropsT) => {
             defaultValue="Month"
             onFocus={(e): void => onFormInputFocus(e)}
             onBlur={onBlur}
+            onChange={onExpirationMonthChange}
           >
             <option disabled>Month</option>
             {monthsArray.map((m) => <option key={m} value={m}>{m}</option>)}
@@ -112,6 +125,7 @@ export const Form: FC<FormPropsT> = (props: FormPropsT) => {
             defaultValue="Year"
             onFocus={(e): void => onFormInputFocus(e)}
             onBlur={onBlur}
+            onChange={onExpirationYearChange}
           >
             <option disabled>Year</option>
             {yearsArray.map((y) => <option key={y} value={y}>{y}</option>)}
@@ -124,10 +138,12 @@ export const Form: FC<FormPropsT> = (props: FormPropsT) => {
             type="text"
             id={FormFieldIds.cardCvv}
             data-ref={FormFieldIds.cardCvv}
-            maxLength={4}
+            pattern="\d*"
+            maxLength={3}
             autoComplete="off"
             onFocus={(e): void => onFormInputFocus(e)}
             onBlur={onBlur}
+            onChange={onCvvChange}
           />
         </Field>
       </Row>

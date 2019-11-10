@@ -37,7 +37,7 @@ export const CardForm = (): ReactElement => {
     })
   );
 
-  const onCCNumberChange = (cardNumber: string): void => updateCardState(
+  const onNumberChange = (cardNumber: string): void => updateCardState(
     (prevState) => ({
       ...prevState,
       cardNumber,
@@ -45,10 +45,31 @@ export const CardForm = (): ReactElement => {
     })
   );
 
-  const onCCHolderChange = (cardHolder: string): void => updateCardState(
+  const onHolderChange = (cardHolder: string): void => updateCardState(
     (prevState) => ({
       ...prevState,
       cardHolder
+    })
+  );
+
+  const onMonthChange = (month: number): void => updateCardState(
+    (prevState) => ({
+      ...prevState,
+      dateM: month
+    })
+  );
+
+  const onYaerChange = (year: number): void => updateCardState(
+    (prevState) => ({
+      ...prevState,
+      dateY: year
+    })
+  );
+
+  const onCvvChange = (cvv: number): void => updateCardState(
+    (prevState) => ({
+      ...prevState,
+      cvv
     })
   );
 
@@ -62,8 +83,11 @@ export const CardForm = (): ReactElement => {
         state={cardState}
         onFocusUpdate={onFocusUpdate}
         onFocusReset={onFocusReset}
-        onCCNumberChange={onCCNumberChange}
-        onCCHolderChange={onCCHolderChange}
+        onNumberChange={onNumberChange}
+        onHolderChange={onHolderChange}
+        onMonthChange={onMonthChange}
+        onYaerChange={onYaerChange}
+        onCvvChange={onCvvChange}
       />
     </Wrapper>
   );
