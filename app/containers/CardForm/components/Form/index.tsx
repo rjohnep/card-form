@@ -6,6 +6,10 @@ import { getCardNumberMask } from '@app/utils/ccUtils';
 import { Wrapper, Field, Row } from './styled';
 import { FormFieldIds, FormPropsT } from './types';
 
+const currentYear = Number(new Date().getFullYear());
+const yearsArray = Array.from(Array(15).keys()).map((n) => currentYear + n);
+const monthsArray = Array.from(Array(12).keys()).map((n) => n + 1);
+
 export const Form: FC<FormPropsT> = (props: FormPropsT) => {
   const [isFocused, setFocus] = useState(false);
 
@@ -100,8 +104,7 @@ export const Form: FC<FormPropsT> = (props: FormPropsT) => {
             onBlur={onBlur}
           >
             <option disabled>Month</option>
-            <option>1</option>
-            <option>2</option>
+            {monthsArray.map((m) => <option key={m} value={m}>{m}</option>)}
           </select>
           <select
             id={FormFieldIds.cardExpirationY}
@@ -111,8 +114,7 @@ export const Form: FC<FormPropsT> = (props: FormPropsT) => {
             onBlur={onBlur}
           >
             <option disabled>Year</option>
-            <option>2019</option>
-            <option>2020</option>
+            {yearsArray.map((y) => <option key={y} value={y}>{y}</option>)}
           </select>
         </Field>
 
