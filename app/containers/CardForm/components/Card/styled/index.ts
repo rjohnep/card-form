@@ -147,6 +147,7 @@ export const Holder = styled.div`
 export const Expires = styled.div`
   z-index: 10;
 
+  cursor: pointer;
   position: absolute;
   right: 25px;
   bottom: 25px;
@@ -156,8 +157,11 @@ export const Expires = styled.div`
   display: flex;
   flex-direction: column;
 
-  label:first-child {
+  label {
     cursor: pointer;
+  }
+
+  label:first-child {
     font-size: 12px;
   }
 `;
@@ -169,8 +173,14 @@ export const CVV = styled.label`
   bottom: 100px;
   left: 50%;
 
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row;
+  align-items: center;
+
   width: 90%;
   height: 40px;
+  padding-right: 9px;
   color: ${(props): string => props.theme.colors.black};
   background: ${(props): string => props.theme.colors.white};
   border-radius: 5px;
@@ -181,6 +191,7 @@ export const CVV = styled.label`
     content: 'CVV';
     position: absolute;
     top: -20px;
+    left: 0;
     width: 100%;
     padding-right: 10px;
     text-align: right;

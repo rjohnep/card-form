@@ -23,8 +23,7 @@ export const Form: FC<FormPropsT> = (props: FormPropsT) => {
         return props.onFocusUpdate(FormFieldIds.cardNumber);
       case FormFieldIds.cardHolder:
         return props.onFocusUpdate(FormFieldIds.cardHolder);
-      case FormFieldIds.cardExpirationM:
-      case FormFieldIds.cardExpirationY:
+      case FormFieldIds.cardExpiration:
         return props.onFocusUpdate(FormFieldIds.cardExpiration);
       case FormFieldIds.cardCvv:
         return props.onFocusUpdate(FormFieldIds.cardCvv);
@@ -72,7 +71,9 @@ export const Form: FC<FormPropsT> = (props: FormPropsT) => {
 
   const onCvvChange = (
     e: ChangeEvent<HTMLInputElement>
-  ): void => props.onCvvChange(Number(e.target.value));
+  ): void => props.onCvvChange(
+    !e.target.value ? undefined : Number(e.target.value)
+  );
 
   return (
     <Wrapper>
@@ -139,7 +140,7 @@ export const Form: FC<FormPropsT> = (props: FormPropsT) => {
             id={FormFieldIds.cardCvv}
             data-ref={FormFieldIds.cardCvv}
             pattern="\d*"
-            maxLength={3}
+            maxLength={4}
             autoComplete="off"
             onFocus={(e): void => onFormInputFocus(e)}
             onBlur={onBlur}
