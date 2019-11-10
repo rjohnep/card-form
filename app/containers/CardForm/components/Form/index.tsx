@@ -1,6 +1,8 @@
 import React, { FC, FocusEvent, useState, useEffect, ChangeEvent } from 'react';
 import InputMask from 'react-input-mask';
 
+import { getCardNumberMask } from '@app/utils/ccUtils';
+
 import { Wrapper, Field, Row } from './styled';
 import { FormFieldIds, FormPropsT } from './types';
 
@@ -50,18 +52,18 @@ export const Form: FC<FormPropsT> = (props: FormPropsT) => {
 
   const onNumberChange = (
     e: ChangeEvent<HTMLInputElement>
-  ): void => props.onCCNumberChange(e.target.value);
+  ): void => props.onCCNumberChange(e.target.value.trim());
 
   const onHolderChange = (
     e: ChangeEvent<HTMLInputElement>
-  ): void => props.onCCHolderChange(e.target.value);
+  ): void => props.onCCHolderChange(e.target.value.trim());
 
   return (
     <Wrapper>
       <Field>
         <label htmlFor={FormFieldIds.cardNumber}>Card Number</label>
         <InputMask
-          mask="9999 9999 9999 9999"
+          mask={getCardNumberMask(props.state.cardType)}
           maskChar=" "
           id={FormFieldIds.cardNumber}
           data-ref={FormFieldIds.cardNumber}

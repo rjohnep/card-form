@@ -10,7 +10,7 @@ export enum CardTypesE {
 export type CardFormStateT = {
   currentFocus: FormFieldIds | undefined;
   cardType: CardTypesE | undefined;
-  cardNumber: string | undefined;
+  cardNumber: string;
   cardHolder: string;
   dateM: number | undefined;
   dateY: number | undefined;

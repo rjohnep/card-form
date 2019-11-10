@@ -2,6 +2,8 @@ import React, { FC, useState, useRef, useEffect } from 'react';
 
 import VisaIcon from '@assets/icons/visa-pay-logo.svg';
 
+import { getCardNumber } from '@app/utils/ccUtils';
+
 import { FormFieldIds } from '../Form/types';
 
 import * as SC from './styled';
@@ -46,24 +48,6 @@ export const Card: FC<CardPropsT> = (props: CardPropsT) => {
     }
   }, [currentFocus]);
 
-  const getCardNumber = (str = ''): string => {
-    const number = str.split('');
-
-    return Array(16)
-      .fill('#')
-      .map((hash, i) => {
-        if (number[i]) {
-          if (i > 3 && i < 12) {
-            return '*';
-          }
-          return number[i];
-        }
-
-        return hash;
-      })
-      .join('');
-  };
-
   return (
     <SC.Wrapper>
       <SC.FrontSide isFront={isFront}>
@@ -74,12 +58,12 @@ export const Card: FC<CardPropsT> = (props: CardPropsT) => {
           ref={refs[FormFieldIds.cardNumber]}
           htmlFor={FormFieldIds.cardNumber}
         >
-          {getCardNumber(props.state.cardNumber)}
+          {getCardNumber(props.state.cardNumber, props.state.cardType)}
         </SC.Number>
         <SC.Holder ref={refs[FormFieldIds.cardHolder]}>
           <label htmlFor={FormFieldIds.cardHolder}>Card Holder</label>
           <label htmlFor={FormFieldIds.cardHolder}>
-            {props.state.cardHolder}
+            {props.state.cardHolder || 'Full Name'}
           </label>
         </SC.Holder>
         <SC.Expires ref={refs[FormFieldIds.cardExpiration]}>

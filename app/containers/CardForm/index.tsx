@@ -1,5 +1,7 @@
 import React, { ReactElement, useState } from 'react';
 
+import { detectCardType } from '@app/utils/ccUtils';
+
 import { Card } from './components/Card';
 import { Form } from './components/Form';
 
@@ -10,8 +12,8 @@ import { FormFieldIds } from './components/Form/types';
 
 const initialState: CardFormStateT = {
   currentFocus: undefined,
-  cardNumber: undefined,
-  cardHolder: 'Full Name',
+  cardNumber: '',
+  cardHolder: '',
   cardType: undefined,
   cvv: undefined,
   dateM: undefined,
@@ -38,7 +40,8 @@ export const CardForm = (): ReactElement => {
   const onCCNumberChange = (cardNumber: string): void => updateCardState(
     (prevState) => ({
       ...prevState,
-      cardNumber
+      cardNumber,
+      cardType: detectCardType(cardNumber)
     })
   );
 
