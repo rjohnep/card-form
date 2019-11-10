@@ -56,7 +56,7 @@ export const Form: FC<FormPropsT> = (props: FormPropsT) => {
 
   const onHolderChange = (
     e: ChangeEvent<HTMLInputElement>
-  ): void => props.onCCHolderChange(e.target.value.trim());
+  ): void => props.onCCHolderChange(e.target.value);
 
   return (
     <Wrapper>

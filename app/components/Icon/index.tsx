@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 
 type IconT = {
-  className: string;
+  className?: string;
   icon: { id: string; viewBox: string };
 };
 

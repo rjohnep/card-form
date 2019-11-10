@@ -1,7 +1,5 @@
 import React, { FC, useState, useRef, useEffect } from 'react';
 
-import VisaIcon from '@assets/icons/visa-pay-logo.svg';
-
 import { getCardNumber } from '@app/utils/ccUtils';
 
 import { FormFieldIds } from '../Form/types';
@@ -53,7 +51,7 @@ export const Card: FC<CardPropsT> = (props: CardPropsT) => {
       <SC.FrontSide isFront={isFront}>
         <SC.Hightlighter meta={focusMeta} />
 
-        <SC.Logo icon={VisaIcon} />
+        <SC.Logo cardType={props.state.cardType} />
 
         <SC.Number
           ref={refs[FormFieldIds.cardNumber]}
@@ -82,7 +80,8 @@ export const Card: FC<CardPropsT> = (props: CardPropsT) => {
         </SC.Expires>
       </SC.FrontSide>
       <SC.BackSide isFront={isFront}>
-        <SC.Logo icon={VisaIcon} back />
+        <SC.Logo cardType={props.state.cardType} back />
+
         <div className="black-line" />
         <SC.CVV htmlFor={FormFieldIds.cardCvv}>{props.state.cvv}</SC.CVV>
       </SC.BackSide>

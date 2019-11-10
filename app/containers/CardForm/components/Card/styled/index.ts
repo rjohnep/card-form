@@ -2,7 +2,7 @@ import { css, FlattenSimpleInterpolation } from 'styled-components';
 
 import { styled } from '@app/theme';
 
-import { Icon } from '@app/components/Icon';
+import { CardLogo } from '@app/containers/CardForm/components/CardLogo';
 
 import Wrapper from './Wrapper';
 import { CardFocusMetaT } from '../types';
@@ -22,7 +22,7 @@ const CommomCardStyle = css`
   backface-visibility: hidden;
 `;
 
-export const Logo = styled(Icon) <{ back?: boolean }>`
+export const Logo = styled(CardLogo) <{ back?: boolean }>`
   z-index: 10;
 
   position: absolute;
@@ -36,7 +36,6 @@ export const Logo = styled(Icon) <{ back?: boolean }>`
     && `
     bottom: 25px;
     top: auto;
-    background: #000;
   `}
 `;
 
@@ -67,6 +66,18 @@ export const BackSide = styled.div<{ isFront: boolean }>`
 
   ${({ isFront }): false | string => !isFront
     && 'transform: perspective(1000px) rotateY(0) rotateX(0deg) rotateZ(0deg);'}
+
+  &:after {
+    content: '';
+
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    bottom: 10%;
+    left: 0;
+
+    background: #ccc;
+  }
 
   .black-line {
     position: absolute;
@@ -160,7 +171,8 @@ export const CVV = styled.label`
 
   width: 90%;
   height: 40px;
-  background: #ccc;
+  color: ${(props): string => props.theme.colors.black};
+  background: ${(props): string => props.theme.colors.white};
   border-radius: 5px;
 
   transform: translate(-50%, 0);
@@ -172,6 +184,7 @@ export const CVV = styled.label`
     width: 100%;
     padding-right: 10px;
     text-align: right;
+    font-size: 13px;
   }
 `;
 
