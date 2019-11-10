@@ -83,7 +83,9 @@ export const Card: FC<CardPropsT> = (props: CardPropsT) => {
         <SC.Logo cardType={props.state.cardType} back />
 
         <div className="black-line" />
-        <SC.CVV htmlFor={FormFieldIds.cardCvv}>{props.state.cvv}</SC.CVV>
+        <SC.CVV htmlFor={FormFieldIds.cardCvv}>
+          {props.state.cvv.split('').map(() => '*')}
+        </SC.CVV>
       </SC.BackSide>
     </SC.Wrapper>
   );

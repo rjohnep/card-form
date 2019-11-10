@@ -71,9 +71,7 @@ export const Form: FC<FormPropsT> = (props: FormPropsT) => {
 
   const onCvvChange = (
     e: ChangeEvent<HTMLInputElement>
-  ): void => props.onCvvChange(
-    !e.target.value ? undefined : Number(e.target.value)
-  );
+  ): void => props.onCvvChange(e.target.value);
 
   return (
     <Wrapper>

@@ -17,5 +17,5 @@ export type FormPropsT = {
   onHolderChange: (holder: string) => void;
   onMonthChange: (month: number) => void;
   onYaerChange: (year: number) => void;
-  onCvvChange: (cvv: number | undefined) => void;
+  onCvvChange: (cvv: string) => void;
 };

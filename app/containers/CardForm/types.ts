@@ -14,5 +14,5 @@ export type CardFormStateT = {
   cardHolder: string;
   dateM: number | undefined;
   dateY: number | undefined;
-  cvv: number | undefined;
+  cvv: string;
 };

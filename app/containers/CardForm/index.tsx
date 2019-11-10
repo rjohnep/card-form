@@ -15,7 +15,7 @@ const initialState: CardFormStateT = {
   cardNumber: '',
   cardHolder: '',
   cardType: undefined,
-  cvv: undefined,
+  cvv: '',
   dateM: undefined,
   dateY: undefined
 };
@@ -24,21 +24,21 @@ export const CardForm = (): ReactElement => {
   const [cardState, updateCardState] = useState(initialState);
 
   const onFocusUpdate = (field: FormFieldIds): void => updateCardState(
-    (prevState) => ({
+    (prevState): CardFormStateT => ({
       ...prevState,
       currentFocus: field
     })
   );
 
   const onFocusReset = (): void => updateCardState(
-    (prevState) => ({
+    (prevState): CardFormStateT => ({
       ...prevState,
       currentFocus: initialState.currentFocus
     })
   );
 
   const onNumberChange = (cardNumber: string): void => updateCardState(
-    (prevState) => ({
+    (prevState): CardFormStateT => ({
       ...prevState,
       cardNumber,
       cardType: detectCardType(cardNumber)
@@ -46,28 +46,28 @@ export const CardForm = (): ReactElement => {
   );
 
   const onHolderChange = (cardHolder: string): void => updateCardState(
-    (prevState) => ({
+    (prevState): CardFormStateT => ({
       ...prevState,
       cardHolder
     })
   );
 
   const onMonthChange = (month: number): void => updateCardState(
-    (prevState) => ({
+    (prevState): CardFormStateT => ({
       ...prevState,
       dateM: month
     })
   );
 
   const onYaerChange = (year: number): void => updateCardState(
-    (prevState) => ({
+    (prevState): CardFormStateT => ({
       ...prevState,
       dateY: year
     })
   );
 
-  const onCvvChange = (cvv: number): void => updateCardState(
-    (prevState) => ({
+  const onCvvChange = (cvv: string): void => updateCardState(
+    (prevState): CardFormStateT => ({
       ...prevState,
       cvv
     })
