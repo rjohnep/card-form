@@ -12,7 +12,7 @@ module.exports = require('./webpack.base')({
   // In production, we skip all hot-reloading stuff
   entry: [
     require.resolve('react-app-polyfill/ie11'),
-    join(process.cwd(), 'app/app.tsx')
+    path.join(process.cwd(), 'app/app.tsx')
   ],
 
   // Utilize long-term caching by adding content hashes (not compilation hashes) to compiled assets
