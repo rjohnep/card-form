@@ -19,5 +19,5 @@ npm run lint:eslint
 npm run lint:eslint:fix
 ```
 
-TODO List:
+TODO:
 - [ ] Animate card elements
